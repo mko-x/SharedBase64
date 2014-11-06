@@ -81,10 +81,10 @@ int decode_out_length(int input_length){
  */
 unsigned char* decode_do(const char* source,
                          int source_length,
-                         int target_length) {
+                         int *target_length) {
     
     // allocate some memory if possible
-    unsigned char *target = malloc(target_length);
+    unsigned char *target = malloc(*target_length);
     if (target == NULL) return NULL;
     
     // initalize working variables
@@ -196,7 +196,7 @@ unsigned char* decode_do(const char* source,
             return NULL;
     }
     
-    end_size = tp;
+    *target_length = tp;
     
     return target;
 }
@@ -209,8 +209,8 @@ unsigned char* decode_do(const char* source,
  *
  *  @return a byte array of encoded source
  */
-unsigned char* decode(const char* data, int input_length){
-    int out_length = decode_out_length(input_length);
+unsigned char* decode(const char* data, int input_length, int *out_length){
+    *out_length = decode_out_length(input_length);
     if(out_length <= 0){
         return NULL;
     }
@@ -220,13 +220,4 @@ unsigned char* decode(const char* data, int input_length){
 //    }
 //    for(int i = 0; i <)
     return output;
-}
-
-/**
- *  Ask for the real end size of the data
- *
- *  @return amount of bytes in result
- */
-int decode_result_size(){
-    return end_size;
 }

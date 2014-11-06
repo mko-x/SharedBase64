@@ -23,7 +23,8 @@
  *  @return encoded base64 string of data
  */
     char* encode(const unsigned char* data,
-                 int input_length);
+                 int input_length,
+                 int *out_length);
 
 /**
  *  Decode base64 string to byte array.
@@ -35,12 +36,7 @@
  *  @return byte array from encoded string
  */
     unsigned char* decode(const char *data,
-                          int input_length);
+                          int input_length,
+                          int *out_length);
 
-/**
- *  Fetch the final result size of decoded string
- *
- *  @return length of bytes in result
- */
-    int decode_result_size();
 #endif

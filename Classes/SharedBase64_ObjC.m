@@ -6,15 +6,17 @@
 //
 //
 
-#import "Base64SqrlCoding.h"
+#import "SharedBase64_ObjC.h"
 
 extern char* encode(const unsigned char* data,
-                    int input_length);
+                    int input_length,
+                    int *output_length);
 
 extern unsigned char* decode(const char* encoded,
-                             int input_length);
+                             int input_length,
+                             int *output_length);
 
-extern int decode_result_size();
+extern int request_size(int key);
 
 @implementation Base64SqrlCoding
 
@@ -28,9 +30,14 @@ static NSStringEncoding _encType = NSASCIIStringEncoding;
  *  @return base64 encoded string representation of input
  */
 +(NSString *) encodeDataToBase64: (NSData *) data{
-    char* rawOut = encode([data bytes], (int) data.length);
+    int outsize = -1;
+    char* rawOut = encode([data bytes], (int) data.length, &outsize);
     
-    return [NSString stringWithUTF8String:rawOut];
+    if(outsize <= data.length){
+        return NULL;
+    }
+    NSString * result = [[NSString alloc] initWithBytesNoCopy:rawOut length:outsize encoding:_encType freeWhenDone:YES];
+    return result;
 }
 
 /**
@@ -48,17 +55,15 @@ static NSStringEncoding _encType = NSASCIIStringEncoding;
     }
     
     const char* rawIn = (const char*) [[string dataUsingEncoding:_encType] bytes];
-    unsigned char* rawOut = decode(rawIn,(int) inLen);
+    
+    int outsize = -1;
+    
+    unsigned char* rawOut = decode(rawIn,(int) inLen, &outsize);
     if(rawOut == NULL){
         return NULL;
     }
     
-    int size = decode_result_size();
-    if(size <= 0){
-        return NULL;
-    }
-    
-    return [NSData dataWithBytes:rawOut length:size];
+    return [NSData dataWithBytes:rawOut length:outsize];
 }
 
 @end

@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
   spec.summary      = 'stripped base64 impl in C'
   
   spec.description  =  <<-DESC
-    Optimized for fast encoded binary cross-platform communication. Offers base64 encoding based on C code with several wrappers. Base 64 encoded strings will have no wrapping, no padding and are url safe. Only dependency is to <stdlib.h> to acces memory, so usable on many platforms.
+    Optimized for fast string encoded binary cross-platform communication. Offers base64 encoding based on C code with several wrappers. Base 64 encoded strings will have no wrapping, no padding and are url safe. Only dependency is to <stdlib.h> to acces memory, so usable on many platforms.
   DESC
 
   spec.source       = { :git => 'https://github.com/mukarev/SharedBase64', :tag => "#{spec.version}" }

@@ -27,15 +27,16 @@ int encode_out_length(int input_length){
 
 char* encode_do(const unsigned char *data,
                     int input_length,
-                    int output_length) {
+                    int *output_length) {
     
-    char *encoded_data = malloc(output_length);
+    char *encoded_data = malloc(*output_length);
     if (encoded_data == NULL) return NULL;
     
+    int tp = 0;
     //main encoding loop
     //sp - sourcepointer
     //tp - targetpointer
-    for (int sp = 0, tp = 0; sp < input_length;) {
+    for (int sp = 0; sp < input_length;) {
         
         int work = -1;
         
@@ -74,10 +75,12 @@ char* encode_do(const unsigned char *data,
         }
     }
     
+    *output_length = tp;
+    
     return encoded_data;
 }
 
-char* encode(const unsigned char* data, int input_length){
-    int out_length = encode_out_length(input_length);
+char* encode(const unsigned char* data, int input_length, int *out_length){
+    *out_length = encode_out_length(input_length);
     return encode_do(data, input_length, out_length);
 }
