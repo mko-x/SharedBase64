@@ -53,7 +53,6 @@ static const int s_third_byte = 2;
 static const int s_emit_bytes = 3;
 static const int s_all_read = 4;
 
-static int end_size;
 /**
  *  Calculate expected length of output data
  *
