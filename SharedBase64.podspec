@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
     Optimized for fast string encoded binary cross-platform communication. Offers base64 encoding based on C code with several wrappers. Base 64 encoded strings will have no wrapping, no padding and are url safe. Only dependency is to <stdlib.h> to acces memory, so usable on many platforms. There is already an objective-c wrapper to use with OSX/iOS.
   DESC
 
-  spec.source       = { :git => 'https://github.com/mko-x/SharedBase64', :tag => "#{spec.version}" }
+  spec.source       = { :git => 'https://github.com/mko-x/SharedBase64.git', :tag => "#{spec.version}" }
   spec.source_files = 'Sources/*.{h,c}', 'Classes/*.{h,m}'
   spec.public_header_files = 'Classes/*.h'
   spec.requires_arc = true
