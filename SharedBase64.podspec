@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'SharedBase64'
-  spec.version      = '1.0.1'
+  spec.version      = '1.0.2'
   spec.license      = { :type => 'Public Domain' }
   spec.homepage     = 'https://github.com/mukarev/SharedBase64'
   spec.authors      = { 'Markus Kosmal' => 'code@m-ko-x.de'}
